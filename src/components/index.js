@@ -5,3 +5,4 @@ export {
   default as AppContextProvider,
   AppContext,
 } from './AppContextProvider';
+export { default as Modal } from './Modal';

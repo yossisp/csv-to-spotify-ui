@@ -4,7 +4,13 @@ import { apiUrl } from 'config';
 import { Span, Card, Button } from 'theme';
 import { AppContext } from 'components';
 
-function readCSVFile(file, userId, uploadFileName, setCSVFileName, addError) {
+function readCSVFile(
+  file: any,
+  userId: string,
+  uploadFileName: string,
+  setCSVFileName: (fileName: string) => void,
+  addError: any
+): void {
   try {
     if (file && userId) {
       const reader = new FileReader();
