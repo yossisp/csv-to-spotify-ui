@@ -31,6 +31,7 @@ yarn-error.log*
 .env.production.local
 .env.aws
 .env.localhost
+.env.netcore
 
 # vercel
 .vercel

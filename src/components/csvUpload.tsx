@@ -22,7 +22,7 @@ function readCSVFile(
           const response = await fetch(`${apiUrl}/csv`, {
             method: 'POST',
             headers: {
-              'Content-Type': 'text/csv',
+              'Content-Type': 'application/json',
             },
             body: JSON.stringify({ userId, csvFile, uploadFileName }),
           });
