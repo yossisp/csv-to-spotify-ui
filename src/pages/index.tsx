@@ -10,7 +10,7 @@ enum WsMessageTypes {
 }
 
 interface ProgressPayload {
-  trackAdded: number;
+  tracksAdded: number;
   tracksNotAdded: number;
 }
 
