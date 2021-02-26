@@ -35,12 +35,15 @@ const NewReleases: React.FC<Props> = () => {
   const { newReleases, sendJsonMessage, userSpotifyID } = useContext(
     AppContext
   );
+
   useEffect(() => {
-    sendJsonMessage({
-      type: WsMessageTypes.newReleases,
-      payload: userSpotifyID,
-    });
-  }, [sendJsonMessage]);
+    if (userSpotifyID) {
+      sendJsonMessage({
+        type: WsMessageTypes.newReleases,
+        payload: userSpotifyID,
+      });
+    }
+  }, [sendJsonMessage, userSpotifyID]);
   console.log('newReleases page', newReleases);
   return newReleases?.albums?.items.length ? (
     <>
