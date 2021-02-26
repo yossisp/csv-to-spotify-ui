@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { signin, signout, useSession } from 'next-auth/client';
+import { AppContext } from 'components';
 import styles from './nav.module.css';
 
 /**
@@ -7,7 +8,8 @@ import styles from './nav.module.css';
  * component that works on pages which support both client and server side
  * rendering, and avoids any flash incorrect content on initial page load.
  * */
-const Nav = ({ setUserSpotifyID }) => {
+const Nav = () => {
+  const { setUserSpotifyID } = useContext(AppContext);
   const [session, loading] = useSession();
 
   useEffect(() => {

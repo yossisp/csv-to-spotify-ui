@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import {
   Progress,
   Nav,
@@ -7,80 +7,17 @@ import {
   NewReleases,
   AppContext,
 } from 'components';
-import { useWebsocket } from 'hooks';
 import { Flex } from 'theme';
 
-enum WsMessageTypes {
-  update = 'UPDATE',
-  jobFinished = 'JOB_FINISHED',
-  user = 'USER',
-  newReleases = 'NEW_RELEASES',
-  recommendations = 'RECOMMENDATIONS',
-}
-
-interface ProgressPayload {
-  tracksAdded: number;
-  tracksNotAdded: number;
-}
-
-interface Parsed {
-  type: string;
-  payload?: any;
-}
-
-const NextAuth: React.FC<{}> = () => {
-  const { setNewReleases } = useContext(AppContext);
-  const [userSpotifyID, setUserSpotifyID] = useState<string | null>(null);
-  const [isUserFound, setIsUserFound] = useState<boolean | null>(null);
-  const [progress, setProgress] = useState<ProgressPayload | null>(null);
-
-  const [csvFileName, setCSVFileName] = useState();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const onMessage = useCallback<(event: MessageEvent) => void>((event) => {
-    const parsed: Parsed = JSON.parse(event.data);
-    switch (parsed.type) {
-      case WsMessageTypes.update:
-        setProgress(parsed.payload);
-        break;
-      case WsMessageTypes.user:
-        setIsUserFound(!!parsed.payload);
-        break;
-      case WsMessageTypes.jobFinished:
-        setIsModalOpen(true);
-        break;
-      case WsMessageTypes.newReleases:
-        const releases = JSON.parse(parsed.payload);
-        setNewReleases(releases);
-        console.log('releases', releases);
-        break;
-      case WsMessageTypes.recommendations:
-        const recommendations = JSON.parse(parsed.payload);
-        console.log('recommendations', recommendations);
-        break;
-      default:
-        console.error('unknown message type, message: ', parsed);
-    }
-  }, []);
-  const { sendJsonMessage } = useWebsocket({
-    onMessage,
-  });
-
-  useEffect(() => {
-    if (userSpotifyID) {
-      sendJsonMessage({ type: WsMessageTypes.user, payload: userSpotifyID });
-    }
-  }, [userSpotifyID, sendJsonMessage]);
+const NextAuth = () => {
+  const { isModalOpen, setIsModalOpen } = useContext(AppContext);
 
   return (
     <>
-      <Nav setUserSpotifyID={setUserSpotifyID} />
+      <Nav />
       <NewReleases />
-      <CSVUpload userId={userSpotifyID} setCSVFileName={setCSVFileName} />
-      <Progress
-        progress={progress}
-        isUserFound={isUserFound}
-        csvFileName={csvFileName}
-      />
+      <CSVUpload />
+      <Progress />
       {isModalOpen && (
         <Modal close={() => setIsModalOpen(false)}>
           <Flex column center p={64} backgroundColor="white">

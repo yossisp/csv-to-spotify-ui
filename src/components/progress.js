@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { AppContext } from 'components';
 import { serverErrors } from 'config';
 
-const Progress = ({ progress, isUserFound, csvFileName }) => {
-  const { errors } = useContext(AppContext);
+const Progress = () => {
+  const { errors, progress, isUserFound, csvFileName } = useContext(AppContext);
   return (
     <>
       {csvFileName && (

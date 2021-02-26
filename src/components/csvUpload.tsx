@@ -45,8 +45,10 @@ function readCSVFile(
   }
 }
 
-const UploadCSV = ({ userId, setCSVFileName }) => {
-  const { addError } = useContext(AppContext);
+const UploadCSV = () => {
+  const { addError, setCSVFileName, userSpotifyID: userId } = useContext(
+    AppContext
+  );
   const [uploadedFile, setUploadedFile] = useState();
   const [uploadFileName, setUploadFileName] = useState();
 
