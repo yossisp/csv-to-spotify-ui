@@ -32,9 +32,14 @@ interface Props {
 }
 
 const NewReleases: React.FC<Props> = () => {
-  const { newReleases, sendJsonMessage } = useContext(AppContext);
+  const { newReleases, sendJsonMessage, userSpotifyID } = useContext(
+    AppContext
+  );
   useEffect(() => {
-    sendJsonMessage({ type: WsMessageTypes.newReleases });
+    sendJsonMessage({
+      type: WsMessageTypes.newReleases,
+      payload: userSpotifyID,
+    });
   }, [sendJsonMessage]);
   console.log('newReleases page', newReleases);
   return newReleases?.albums?.items.length ? (
