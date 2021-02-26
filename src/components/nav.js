@@ -1,7 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import { signin, signout, useSession } from 'next-auth/client';
-import { AppContext } from 'components';
-import styles from './nav.module.css';
+import { AppContext, Menu } from 'components';
+import { Flex } from 'theme';
+// import styles from './nav.module.css';
 
 /**
  * The approach used in this component shows how to built a sign in and sign out
@@ -27,14 +28,17 @@ const Nav = () => {
       <noscript>
         <style>{'.nojs-show { opacity: 1; top: 0; }'}</style>
       </noscript>
-      <p
-        className={`nojs-show ${
-          !session && loading ? styles.loading : styles.loaded
-        }`}
-      >
+      <div>
         {!session && (
-          <>
-            <span className={styles.notSignedIn}>Not signed in</span>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Menu />
+            <span>Not signed in</span>
             <a
               href="/api/auth/signin"
               onClick={(e) => {
@@ -42,13 +46,20 @@ const Nav = () => {
                 signin();
               }}
             >
-              <button className={styles.signinButton}>Sign in</button>
+              <button>Sign in</button>
             </a>
-          </>
+          </div>
         )}
         {session && (
-          <>
-            <span className={styles.signedIn}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Menu />
+            <span>
               Signed in as <strong>{session.user.name}</strong>
             </span>
             <a
@@ -58,11 +69,11 @@ const Nav = () => {
                 signout();
               }}
             >
-              <button className={styles.signoutButton}>Sign out</button>
+              <button>Sign out</button>
             </a>
-          </>
+          </div>
         )}
-      </p>
+      </div>
     </nav>
   );
 };

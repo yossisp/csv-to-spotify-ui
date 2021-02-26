@@ -32,6 +32,7 @@ interface Props {
 
 const NewReleases: React.FC<Props> = () => {
   const { newReleases }: { newReleases: Albums } = useContext(AppContext);
+  console.log('newReleases page', newReleases);
   return newReleases?.albums?.items.length ? (
     <>
       <Card fontSize={22} bold pb={16}>

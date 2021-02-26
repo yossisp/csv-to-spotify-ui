@@ -36,10 +36,4 @@ const Progress = () => {
   );
 };
 
-Progress.propTypes = {
-  progress: PropTypes.object,
-  isUserFound: PropTypes.bool,
-  csvFileName: PropTypes.string,
-};
-
 export default Progress;
