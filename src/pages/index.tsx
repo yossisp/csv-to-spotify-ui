@@ -1,5 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Progress, Nav, CSVUpload, Modal, NewReleases } from 'components';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
+import {
+  Progress,
+  Nav,
+  CSVUpload,
+  Modal,
+  NewReleases,
+  AppContext,
+} from 'components';
 import { useWebsocket } from 'hooks';
 import { Flex } from 'theme';
 
@@ -22,10 +29,11 @@ interface Parsed {
 }
 
 const NextAuth: React.FC<{}> = () => {
+  const { setNewReleases } = useContext(AppContext);
   const [userSpotifyID, setUserSpotifyID] = useState<string | null>(null);
   const [isUserFound, setIsUserFound] = useState<boolean | null>(null);
   const [progress, setProgress] = useState<ProgressPayload | null>(null);
-  const [newReleases, setNewReleases] = useState();
+
   const [csvFileName, setCSVFileName] = useState();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const onMessage = useCallback<(event: MessageEvent) => void>((event) => {
@@ -66,7 +74,7 @@ const NextAuth: React.FC<{}> = () => {
   return (
     <>
       <Nav setUserSpotifyID={setUserSpotifyID} />
-      <NewReleases releases={newReleases} />
+      <NewReleases />
       <CSVUpload userId={userSpotifyID} setCSVFileName={setCSVFileName} />
       <Progress
         progress={progress}

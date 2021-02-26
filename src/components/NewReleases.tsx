@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Grid, Card } from 'theme';
-import { Link } from 'components';
+import { Link, AppContext } from 'components';
 
 interface ExternalUrl {
   spotify: string;
@@ -30,15 +30,15 @@ interface Props {
   releases?: Albums;
 }
 
-const NewReleases: React.FC<Props> = (props) => {
-  console.log('NewReleases', props);
-  return props.releases?.albums?.items.length ? (
+const NewReleases: React.FC<Props> = () => {
+  const { newReleases }: { newReleases: Albums } = useContext(AppContext);
+  return newReleases?.albums?.items.length ? (
     <>
       <Card fontSize={22} bold pb={16}>
         New Releases
       </Card>
       <Grid>
-        {props.releases.albums.items.map((item: Release) => {
+        {newReleases.albums.items.map((item: Release) => {
           const image =
             item.images.length > 1
               ? item.images
@@ -48,8 +48,6 @@ const NewReleases: React.FC<Props> = (props) => {
                   })
                   .sort((a, b) => a.width - b.width)[1]
               : item.images[0];
-          const href = 'https://open.spotify.com/album';
-          console.log('item', item);
           return (
             <Card pr={16} pb={16}>
               <Link href={item.externalUrls.spotify} external>
