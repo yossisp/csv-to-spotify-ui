@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Grid, Card } from 'theme';
 import { Link, AppContext } from 'components';
+import { WsMessageTypes } from 'types';
 
 interface ExternalUrl {
   spotify: string;
@@ -31,7 +32,10 @@ interface Props {
 }
 
 const NewReleases: React.FC<Props> = () => {
-  const { newReleases }: { newReleases: Albums } = useContext(AppContext);
+  const { newReleases, sendJsonMessage } = useContext(AppContext);
+  useEffect(() => {
+    sendJsonMessage({ type: WsMessageTypes.newReleases });
+  }, [sendJsonMessage]);
   console.log('newReleases page', newReleases);
   return newReleases?.albums?.items.length ? (
     <>

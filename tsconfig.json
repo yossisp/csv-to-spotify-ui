@@ -5,7 +5,8 @@
       "hooks": ["hooks/*"],
       "components": ["components/*"],
       "config": ["config.js"],
-      "theme": ["theme/*"]
+      "theme": ["theme/*"],
+      "types": ["types/*"]
     },
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],

@@ -1,15 +1,8 @@
 import React, { useState, createContext, useCallback, useEffect } from 'react';
 import { useWebsocket } from 'hooks';
+import { WsMessageTypes } from 'types';
 
 export const AppContext = createContext(null);
-
-enum WsMessageTypes {
-  update = 'UPDATE',
-  jobFinished = 'JOB_FINISHED',
-  user = 'USER',
-  newReleases = 'NEW_RELEASES',
-  recommendations = 'RECOMMENDATIONS',
-}
 
 interface ProgressPayload {
   tracksAdded: number;
@@ -85,6 +78,7 @@ const AppContextProvider = ({ children }) => {
         isUserFound,
         isModalOpen,
         setIsModalOpen,
+        sendJsonMessage,
       }}
     >
       {children}

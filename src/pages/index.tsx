@@ -1,12 +1,5 @@
 import React, { useContext } from 'react';
-import {
-  Progress,
-  Nav,
-  CSVUpload,
-  Modal,
-  NewReleases,
-  AppContext,
-} from 'components';
+import { Progress, Nav, CSVUpload, Modal, AppContext } from 'components';
 import { Flex } from 'theme';
 
 const NextAuth = () => {
