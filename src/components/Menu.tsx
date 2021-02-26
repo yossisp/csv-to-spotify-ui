@@ -63,21 +63,17 @@ export default function CustomizedMenus() {
           <ListItemIcon>
             <SendIcon fontSize="small" />
           </ListItemIcon>
-          <Link href="/new-releases" onClick={handleClose}>
-            New Releases
+          <Link href="/" onClick={handleClose}>
+            Home
           </Link>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
             <DraftsIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary="Drafts" />
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
+          <Link href="/new-releases" onClick={handleClose}>
+            New Releases
+          </Link>
         </MenuItem>
       </StyledMenu>
     </div>
