@@ -6,3 +6,5 @@ export {
   AppContext,
 } from './AppContextProvider';
 export { default as Modal } from './Modal';
+export { default as NewReleases } from './NewReleases';
+export { default as Link } from './Link';
