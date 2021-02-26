@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'next-auth/client';
 import { siteUrl } from 'config';
-import { AppContextProvider } from 'components';
+import { AppContextProvider, Layout } from 'components';
 import '../styles.css';
 
 const App = ({ Component, pageProps }) => {
@@ -10,7 +10,9 @@ const App = ({ Component, pageProps }) => {
   return (
     <Provider options={{ site: siteUrl }} session={session}>
       <AppContextProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </AppContextProvider>
     </Provider>
   );

@@ -63,7 +63,9 @@ export default function CustomizedMenus() {
           <ListItemIcon>
             <SendIcon fontSize="small" />
           </ListItemIcon>
-          <Link href="/new-releases">New Releases</Link>
+          <Link href="/new-releases" onClick={handleClose}>
+            New Releases
+          </Link>
         </MenuItem>
         <MenuItem>
           <ListItemIcon>

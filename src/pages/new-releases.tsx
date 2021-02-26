@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Grid, Card } from 'theme';
-import { Link, AppContext } from 'components';
+import { Link, AppContext, Loader } from 'components';
 import { WsMessageTypes } from 'types';
 
 interface ExternalUrl {
@@ -73,7 +73,9 @@ const NewReleases: React.FC<Props> = () => {
         })}
       </Grid>
     </>
-  ) : null;
+  ) : (
+    <Loader isLoading={newReleases?.albums?.items.length} />
+  );
 };
 
 export default NewReleases;

@@ -6,19 +6,21 @@ interface Props {
   href: string;
   as?: string;
   children: ReactChild | ReactChildren;
+  onClick?: () => void;
 }
-const Link: React.FC<Props> = ({ external, href, children, as }) => {
+const Link: React.FC<Props> = ({ external, href, children, as, onClick }) => {
   let link;
+
   if (external) {
     link = (
-      <a href={href} target="_blank" rel="noreferrer">
+      <a href={href} target="_blank" rel="noreferrer" onClick={onClick}>
         {children}
       </a>
     );
   } else {
     link = (
       <NextLink href={href} as={as}>
-        {children}
+        <a onClick={onClick}>{children}</a>
       </NextLink>
     );
   }

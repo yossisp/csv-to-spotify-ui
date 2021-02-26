@@ -7,7 +7,6 @@ const NextAuth = () => {
 
   return (
     <>
-      <Nav />
       <CSVUpload />
       <Progress />
       {isModalOpen && (
