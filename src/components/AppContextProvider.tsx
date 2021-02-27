@@ -21,8 +21,12 @@ const AppContextProvider = ({ children }) => {
   const [progress, setProgress] = useState<ProgressPayload | null>(null);
   const [csvFileName, setCSVFileName] = useState();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
   const [newReleases, setNewReleases] = useState();
+  const [isWSConnectionAccepted, setIsWSConnectionAccepted] = useState<boolean>(
+    false
+  );
+  const [genres, setGenres] = useState();
+  const [recommendations, setRecommendations] = useState();
   const addError = useCallback(
     (error) => setErrors((prevErrors) => [...prevErrors, error]),
     []
@@ -31,6 +35,9 @@ const AppContextProvider = ({ children }) => {
   const onMessage = useCallback<(event: MessageEvent) => void>((event) => {
     const parsed: Parsed = JSON.parse(event.data);
     switch (parsed.type) {
+      case WsMessageTypes.accepted:
+        setIsWSConnectionAccepted(true);
+        break;
       case WsMessageTypes.update:
         setProgress(parsed.payload);
         break;
@@ -47,7 +54,13 @@ const AppContextProvider = ({ children }) => {
         break;
       case WsMessageTypes.recommendations:
         const recommendations = JSON.parse(parsed.payload);
+        setRecommendations(recommendations);
         console.log('recommendations', recommendations);
+        break;
+      case WsMessageTypes.genres:
+        const genres = JSON.parse(parsed.payload);
+        setGenres(genres);
+        console.log('genres', genres);
         break;
       default:
         console.error('unknown message type, message: ', parsed);
@@ -79,6 +92,9 @@ const AppContextProvider = ({ children }) => {
         isModalOpen,
         setIsModalOpen,
         sendJsonMessage,
+        recommendations,
+        genres,
+        isWSConnectionAccepted,
       }}
     >
       {children}

@@ -1,15 +1,44 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Grid, Card, H1 } from 'theme';
 import { Link, AppContext, Loader, RecommendationForm } from 'components';
 import { WsMessageTypes } from 'types';
 
 const Recommendations = () => {
+  const [formInput, setFormInput] = useState();
+  const {
+    isWSConnectionAccepted,
+    genres,
+    recommendations,
+    sendJsonMessage,
+    userSpotifyID,
+  } = useContext(AppContext);
+  console.log('formInput', formInput);
+  useEffect(() => {
+    if (isWSConnectionAccepted && !genres && userSpotifyID) {
+      sendJsonMessage({
+        type: WsMessageTypes.genres,
+        payload: userSpotifyID,
+      });
+    }
+
+    if (isWSConnectionAccepted && userSpotifyID) {
+      sendJsonMessage({
+        type: WsMessageTypes.recommendations,
+        payload: userSpotifyID,
+      });
+    }
+  }, [sendJsonMessage, userSpotifyID, genres, isWSConnectionAccepted]);
+
   return (
     <>
       <H1 fontSize={22} bold pb={16}>
         Recommendations
       </H1>
-      <RecommendationForm />
+      {genres ? (
+        <RecommendationForm setFormInput={setFormInput} genres={genres} />
+      ) : (
+        <Loader isLoading={!genres} />
+      )}
     </>
   );
 };

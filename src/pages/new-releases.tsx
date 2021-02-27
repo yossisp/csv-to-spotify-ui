@@ -32,18 +32,21 @@ interface Props {
 }
 
 const NewReleases: React.FC<Props> = () => {
-  const { newReleases, sendJsonMessage, userSpotifyID } = useContext(
-    AppContext
-  );
+  const {
+    newReleases,
+    sendJsonMessage,
+    userSpotifyID,
+    isWSConnectionAccepted,
+  } = useContext(AppContext);
 
   useEffect(() => {
-    if (userSpotifyID) {
+    if (userSpotifyID && isWSConnectionAccepted) {
       sendJsonMessage({
         type: WsMessageTypes.newReleases,
         payload: userSpotifyID,
       });
     }
-  }, [sendJsonMessage, userSpotifyID]);
+  }, [sendJsonMessage, userSpotifyID, isWSConnectionAccepted]);
   console.log('newReleases page', newReleases);
   return (
     <>
