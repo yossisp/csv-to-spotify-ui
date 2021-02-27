@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Grid, Card } from 'theme';
+import { Grid, Card, H1 } from 'theme';
 import { Link, AppContext, Loader } from 'components';
 import { WsMessageTypes } from 'types';
 
@@ -45,39 +45,41 @@ const NewReleases: React.FC<Props> = () => {
     }
   }, [sendJsonMessage, userSpotifyID]);
   console.log('newReleases page', newReleases);
-  return newReleases?.albums?.items.length ? (
+  return (
     <>
-      <Card fontSize={22} bold pb={16}>
+      <H1 fontSize={22} bold pb={16}>
         New Releases
-      </Card>
-      <Grid>
-        {newReleases.albums.items.map((item: Release) => {
-          const image =
-            item.images.length > 1
-              ? item.images
-                  .map((image) => {
-                    image.width = Number(image.width);
-                    return image;
-                  })
-                  .sort((a, b) => a.width - b.width)[1]
-              : item.images[0];
-          return (
-            <Card pr={16} pb={16}>
-              <Link href={item.externalUrls.spotify} external>
-                <>
-                  <img src={image.url} alt={item.name} />
-                  <Card fontSize={16} bold>
-                    {item.artists.map(({ name }) => name).join()}
-                  </Card>
-                </>
-              </Link>
-            </Card>
-          );
-        })}
-      </Grid>
+      </H1>
+      {newReleases?.albums?.items.length ? (
+        <Grid>
+          {newReleases.albums.items.map((item: Release) => {
+            const image =
+              item.images.length > 1
+                ? item.images
+                    .map((image) => {
+                      image.width = Number(image.width);
+                      return image;
+                    })
+                    .sort((a, b) => a.width - b.width)[1]
+                : item.images[0];
+            return (
+              <Card pr={16} pb={16}>
+                <Link href={item.externalUrls.spotify} external>
+                  <>
+                    <img src={image.url} alt={item.name} />
+                    <Card fontSize={16} bold>
+                      {item.artists.map(({ name }) => name).join()}
+                    </Card>
+                  </>
+                </Link>
+              </Card>
+            );
+          })}
+        </Grid>
+      ) : (
+        <Loader isLoading={newReleases?.albums?.items.length} />
+      )}
     </>
-  ) : (
-    <Loader isLoading={newReleases?.albums?.items.length} />
   );
 };
 
