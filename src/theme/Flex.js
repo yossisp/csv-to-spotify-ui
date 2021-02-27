@@ -4,6 +4,7 @@ import Card from './Card';
 import { column } from './system';
 
 const Flex = styled(Card)`
+  display: flex;
   ${flexbox}
   ${column}
 `;
