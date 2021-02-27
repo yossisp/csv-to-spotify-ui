@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Grid, Card, H1, Flex } from 'theme';
 import { Link, AppContext, Loader, RecommendationForm } from 'components';
 import { WsMessageTypes } from 'types';
+import { usePrevious } from 'hooks';
 
 const NOT_FOUND = 'NOT_FOUND';
 const EMPTY_INPUT = 'Nothing selected yet';
@@ -29,6 +30,7 @@ const Recommendations = () => {
     sendJsonMessage,
     userSpotifyID,
   } = useContext(AppContext);
+  const prevFormInput = usePrevious(formInput);
 
   const recommended: Recommendations & string = recommendations;
   console.log('formInput', formInput);
@@ -43,8 +45,8 @@ const Recommendations = () => {
     if (
       isWSConnectionAccepted &&
       userSpotifyID &&
-      !recommendations &&
-      formInput
+      formInput &&
+      formInput !== prevFormInput
     ) {
       sendJsonMessage({
         type: WsMessageTypes.recommendations,
