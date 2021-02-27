@@ -21,19 +21,28 @@ const Recommendations = () => {
       });
     }
 
-    if (isWSConnectionAccepted && userSpotifyID) {
+    if (
+      isWSConnectionAccepted &&
+      userSpotifyID &&
+      !recommendations &&
+      formInput
+    ) {
       sendJsonMessage({
         type: WsMessageTypes.recommendations,
         payload: {
           user: userSpotifyID,
-          recommendations: {
-            track: 'Beatles - Yesterday',
-            genre: 'rock',
-          },
+          recommendations: formInput,
         },
       });
     }
-  }, [sendJsonMessage, userSpotifyID, genres, isWSConnectionAccepted]);
+  }, [
+    sendJsonMessage,
+    userSpotifyID,
+    genres,
+    isWSConnectionAccepted,
+    recommendations,
+    formInput,
+  ]);
 
   return (
     <>

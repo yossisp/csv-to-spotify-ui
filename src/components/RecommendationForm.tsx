@@ -14,7 +14,8 @@ import { TextField } from 'formik-material-ui';
 import Box from '@material-ui/core/Box';
 
 interface Values {
-  track: string;
+  artist: string;
+  song: string;
   select: string;
 }
 
@@ -39,14 +40,19 @@ const RecommendationForm: React.FC<Props> = ({ setFormInput, genres }) => {
   return (
     <Formik
       initialValues={{
-        track: '',
-        select: 'rock',
+        artist: '',
+        song: '',
+        genre: 'rock',
       }}
       validate={(values: Partial<Values>) => {
         console.log('values', values);
         const errors: Partial<Values> = {};
-        if (!values.track) {
-          errors.track = 'Required';
+        if (!values.artist) {
+          errors.artist = 'Required';
+        }
+
+        if (!values.song) {
+          errors.song = 'Required';
         }
 
         return errors;
@@ -64,15 +70,18 @@ const RecommendationForm: React.FC<Props> = ({ setFormInput, genres }) => {
             <Field
               component={TextField}
               type="text"
-              label="Track"
-              name="track"
+              label="Artist"
+              name="artist"
             />
+          </Box>
+          <Box margin={1}>
+            <Field component={TextField} type="text" label="Song" name="song" />
           </Box>
           <Box margin={1}>
             <Field
               component={TextField}
               type="text"
-              name="select"
+              name="genre"
               label="Select a Genre"
               select
               variant="standard"
