@@ -40,7 +40,7 @@ const RecommendationForm: React.FC<Props> = ({ setFormInput, genres }) => {
     <Formik
       initialValues={{
         track: '',
-        select: 1,
+        select: 'rock',
       }}
       validate={(values: Partial<Values>) => {
         console.log('values', values);

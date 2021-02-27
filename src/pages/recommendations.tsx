@@ -24,7 +24,13 @@ const Recommendations = () => {
     if (isWSConnectionAccepted && userSpotifyID) {
       sendJsonMessage({
         type: WsMessageTypes.recommendations,
-        payload: userSpotifyID,
+        payload: {
+          user: userSpotifyID,
+          recommendations: {
+            track: 'Beatles - Yesterday',
+            genre: 'rock',
+          },
+        },
       });
     }
   }, [sendJsonMessage, userSpotifyID, genres, isWSConnectionAccepted]);

@@ -66,7 +66,7 @@ const NewReleases: React.FC<Props> = () => {
                     .sort((a, b) => a.width - b.width)[1]
                 : item.images[0];
             return (
-              <Card pr={16} pb={16}>
+              <Card pr={16} pb={16} key={item.name}>
                 <Link href={item.externalUrls.spotify} external>
                   <>
                     <img src={image.url} alt={item.name} />
