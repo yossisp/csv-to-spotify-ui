@@ -83,6 +83,14 @@ export default function CustomizedMenus() {
             Recommendations
           </Link>
         </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <DraftsIcon fontSize="small" />
+          </ListItemIcon>
+          <Link href="/account" onClick={handleClose}>
+            Account
+          </Link>
+        </MenuItem>
       </StyledMenu>
     </div>
   );

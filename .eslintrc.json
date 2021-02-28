@@ -36,6 +36,7 @@
     "arrow-body-style": "off",
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
-    "import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "wrap-iife": "off"
   }
 }
