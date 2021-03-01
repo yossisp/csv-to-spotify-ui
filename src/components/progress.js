@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { Card } from 'theme';
+import { Card, Span } from 'theme';
 import PropTypes from 'prop-types';
-import { AppContext } from 'components';
+import { AppContext, Odometer } from 'components';
 import { serverErrors } from 'config';
 
 const Progress = () => {
@@ -28,8 +28,18 @@ const Progress = () => {
       )}
       {progress ? (
         <>
-          <Card>Tracks Added: {progress.tracksAdded}</Card>
-          <Card>Tracks Not Added: {progress.tracksNotAdded}</Card>
+          <Card fontSize={22} pt={32}>
+            Tracks Added:
+            <Span pl={16}>
+              <Odometer value={progress.tracksAdded} format="(dddd)" />
+            </Span>
+          </Card>
+          <Card fontSize={22}>
+            Tracks Not Added:
+            <Span pl={16}>
+              <Odometer value={progress.tracksNotAdded} format="(dddd)" />
+            </Span>
+          </Card>
         </>
       ) : null}
     </>

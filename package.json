@@ -23,6 +23,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loader-spinner": "^4.0.0",
+    "react-odometerjs": "^2.1.1",
     "react-use-websocket": "^2.1.1",
     "sqlite3": "^4.2.0",
     "styled-components": "^5.2.0",

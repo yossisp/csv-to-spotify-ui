@@ -2,7 +2,8 @@ import React from 'react';
 import { Provider } from 'next-auth/client';
 import { siteUrl } from 'config';
 import { AppContextProvider, Layout } from 'components';
-import '../styles.css';
+import '../css/styles.css';
+import '../css/odometer.css';
 
 const App = ({ Component, pageProps }) => {
   const { session } = pageProps;
