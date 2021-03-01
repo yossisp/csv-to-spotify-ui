@@ -4,6 +4,20 @@ import { Link, AppContext, Loader, RecommendationForm } from 'components';
 import { WsMessageTypes } from 'types';
 import { usePrevious } from 'hooks';
 import { apiUrl } from 'config';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import styled from 'styled-components';
+
+const HeaderCell = styled(Span)`
+  font-weight: bold;
+  font-size: 16px;
+`;
 
 enum Status {
   success = 'SUCCESS',
@@ -41,21 +55,36 @@ const Account = () => {
   }, [userSpotifyID, userStats.length]);
 
   return userStats.length ? (
-    <Flex column>
-      {userStats.map((stat) => (
-        <Flex key={stat.id}>
-          <Span pb={16} pr={16}>
-            Playlist Name: <Span>{stat.name}</Span>
-          </Span>
-          <Span pb={16} pr={16}>
-            Status: <Span>{stat.status}</Span>
-          </Span>
-          <Span pb={16} pr={16}>
-            Tracks Added: <Span>{stat.tracksAdded}</Span>
-          </Span>
-        </Flex>
-      ))}
-    </Flex>
+    <Card width={600}>
+      <TableContainer component={Paper}>
+        <Table aria-label="User Stats Table">
+          <TableHead>
+            <TableRow>
+              <TableCell>
+                <HeaderCell>Playlist Name</HeaderCell>{' '}
+              </TableCell>
+              <TableCell align="right">
+                <HeaderCell>Status</HeaderCell>{' '}
+              </TableCell>
+              <TableCell align="right">
+                <HeaderCell>Total Tracks Added</HeaderCell>{' '}
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {userStats.map((stat) => (
+              <TableRow key={stat.id}>
+                <TableCell component="th" scope="row">
+                  {stat.name}
+                </TableCell>
+                <TableCell align="right">{stat.status}</TableCell>
+                <TableCell align="right">{stat.tracksAdded}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Card>
   ) : null;
 };
 
