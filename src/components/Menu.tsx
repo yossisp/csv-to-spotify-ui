@@ -4,11 +4,11 @@ import Button from '@material-ui/core/Button';
 import Menu, { MenuProps } from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import { Link } from 'theme';
+import FiberNewIcon from '@material-ui/icons/FiberNew';
+import HomeIcon from '@material-ui/icons/Home';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import FeaturedPlayListIcon from '@material-ui/icons/FeaturedPlayList';
+import { useRouter } from 'next/router';
 
 const StyledMenu = withStyles({
   paper: {
@@ -41,6 +41,13 @@ export default function CustomizedMenus() {
     setAnchorEl(null);
   };
 
+  const router = useRouter();
+
+  const navigateTo = (path) => {
+    router.push(path);
+    handleClose();
+  };
+
   return (
     <div>
       <Button
@@ -59,37 +66,45 @@ export default function CustomizedMenus() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigateTo('/');
+          }}
+        >
           <ListItemIcon>
-            <SendIcon fontSize="small" />
+            <HomeIcon fontSize="small" />
           </ListItemIcon>
-          <Link href="/" onClick={handleClose}>
-            Home
-          </Link>
+          Home
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigateTo('/new-releases');
+          }}
+        >
           <ListItemIcon>
-            <DraftsIcon fontSize="small" />
+            <FiberNewIcon fontSize="small" />
           </ListItemIcon>
-          <Link href="/new-releases" onClick={handleClose}>
-            New Releases
-          </Link>
+          New Releases
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigateTo('/recommendations');
+          }}
+        >
           <ListItemIcon>
-            <DraftsIcon fontSize="small" />
+            <FeaturedPlayListIcon fontSize="small" />
           </ListItemIcon>
-          <Link href="/recommendations" onClick={handleClose}>
-            Recommendations
-          </Link>
+          Recommendations
         </MenuItem>
-        <MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigateTo('/account');
+          }}
+        >
           <ListItemIcon>
-            <DraftsIcon fontSize="small" />
+            <AccountCircleIcon fontSize="small" />
           </ListItemIcon>
-          <Link href="/account" onClick={handleClose}>
-            Account
-          </Link>
+          Account
         </MenuItem>
       </StyledMenu>
     </div>
