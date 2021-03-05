@@ -100,20 +100,15 @@ export default function CustomizedMenus() {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            navigateTo('/account');
+            navigateTo('/activity');
           }}
         >
           <ListItemIcon>
             <AccountCircleIcon fontSize="small" />
           </ListItemIcon>
-          Account
+          My Activity
         </MenuItem>
       </StyledMenu>
     </div>
   );
 }
-
-const variants = {
-  open: { opacity: 1, x: 0 },
-  closed: { opacity: 0, x: '-100%' },
-};
