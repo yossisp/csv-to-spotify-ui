@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from 'react';
 import { signin, signout, useSession } from 'next-auth/client';
 import { AppContext, Menu } from 'components';
-import { Card, ButtonMui } from 'theme';
+import { Card, ButtonMui, Span, Flex } from 'theme';
 
 const Nav = () => {
-  const { setUserSpotifyID } = useContext(AppContext);
+  const { setUserSpotifyID, cleanUp } = useContext(AppContext);
   const [session, loading] = useSession();
 
   useEffect(() => {
@@ -24,26 +24,29 @@ const Nav = () => {
           <style>{'.nojs-show { opacity: 1; top: 0; }'}</style>
         </noscript>
         <div>
-          {!session && (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}
+          {!session && !loading && (
+            <Flex
+              position="absolute"
+              justifyContent="center"
+              alignItems="center"
+              top={0}
+              bottom={0}
+              left={0}
+              right={0}
             >
-              <Menu />
-              <span>Not signed in</span>
               <a
                 href="/api/auth/signin"
                 onClick={(e) => {
                   e.preventDefault();
                   signin();
                 }}
+                style={{ textDecoration: 'none' }}
               >
-                <ButtonMui color="secondary">Sign in</ButtonMui>
+                <ButtonMui color="secondary">
+                  <Span fontSize={18}>Sign in</Span>
+                </ButtonMui>
               </a>
-            </div>
+            </Flex>
           )}
           {session && (
             <div
@@ -57,16 +60,16 @@ const Nav = () => {
               <span>
                 Signed in as <strong>{session.user.name}</strong>
               </span>
-              <a
-                href="/api/auth/signout"
-                onClick={(e) => {
-                  e.preventDefault();
-                  signout();
+              <ButtonMui
+                onClick={() => {
+                  cleanUp();
+                  signout({ redirect: false, callbackUrl: '/' });
+                  console.log('onClick signout');
                 }}
-                style={{ textDecoration: 'none' }}
+                color="secondary"
               >
-                <ButtonMui color="secondary">Sign out</ButtonMui>
-              </a>
+                Sign out
+              </ButtonMui>
             </div>
           )}
         </div>

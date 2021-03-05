@@ -4,7 +4,7 @@ import Nav from './nav';
 
 const Layout: React.FC = ({ children }) => {
   return (
-    <Card pl={100}>
+    <Card px={100}>
       <Nav />
       {children}
     </Card>

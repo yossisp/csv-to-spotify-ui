@@ -3,10 +3,12 @@
     "baseUrl": "./src",
     "paths": {
       "hooks": ["hooks/*"],
+      "hocs": ["hocs/*"],
       "components": ["components/*"],
       "config": ["config.js"],
       "theme": ["theme/*"],
-      "types": ["types/*"]
+      "types": ["types/*"],
+      "helpers": ["helpers/*"]
     },
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],

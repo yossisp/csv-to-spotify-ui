@@ -13,6 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components';
+import { withAuth } from 'hocs';
 
 const HeaderCell = styled(Span)`
   font-weight: bold;
@@ -88,4 +89,4 @@ const Account = () => {
   ) : null;
 };
 
-export default Account;
+export default withAuth(Account);

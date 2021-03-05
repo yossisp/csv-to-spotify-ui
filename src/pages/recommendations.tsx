@@ -3,6 +3,7 @@ import { Grid, Card, H1, Flex } from 'theme';
 import { Link, AppContext, Loader, RecommendationForm } from 'components';
 import { WsMessageTypes } from 'types';
 import { usePrevious } from 'hooks';
+import { withAuth } from 'hocs';
 
 const NOT_FOUND = 'NOT_FOUND';
 const EMPTY_INPUT = 'Nothing selected yet';
@@ -18,9 +19,10 @@ interface Track {
   externalUrls: Url;
   artists: Artist[];
 }
-interface Recommendations {
+interface RecommendationsData {
   tracks: Track[];
 }
+
 const Recommendations = () => {
   const [formInput, setFormInput] = useState();
   const {
@@ -31,9 +33,7 @@ const Recommendations = () => {
     userSpotifyID,
   } = useContext(AppContext);
   const prevFormInput = usePrevious(formInput);
-
-  const recommended: Recommendations & string = recommendations;
-  console.log('formInput', formInput);
+  const recommended: RecommendationsData & string = recommendations;
   useEffect(() => {
     if (isWSConnectionAccepted && !genres && userSpotifyID) {
       sendJsonMessage({
@@ -63,11 +63,12 @@ const Recommendations = () => {
     isWSConnectionAccepted,
     recommendations,
     formInput,
+    prevFormInput,
   ]);
 
   return (
     <>
-      <H1 fontSize={22} bold pb={16}>
+      <H1 isAnimated pb={16}>
         Artist Recommendations
       </H1>
       {genres ? (
@@ -99,4 +100,4 @@ const Recommendations = () => {
   );
 };
 
-export default Recommendations;
+export default withAuth(Recommendations);

@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Grid, Card, H1 } from 'theme';
 import { Link, AppContext, Loader } from 'components';
 import { WsMessageTypes } from 'types';
+import { withAuth } from 'hocs';
 
 interface ExternalUrl {
   spotify: string;
@@ -50,7 +51,7 @@ const NewReleases: React.FC<Props> = () => {
   console.log('newReleases page', newReleases);
   return (
     <>
-      <H1 fontSize={22} bold pb={16}>
+      <H1 pb={16} isAnimated>
         New Releases
       </H1>
       {newReleases?.albums?.items.length ? (
@@ -86,4 +87,4 @@ const NewReleases: React.FC<Props> = () => {
   );
 };
 
-export default NewReleases;
+export default withAuth(NewReleases);

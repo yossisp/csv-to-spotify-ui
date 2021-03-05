@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { Progress, Nav, CSVUpload, Modal, AppContext } from 'components';
+import { Progress, CSVUpload, Modal, AppContext } from 'components';
 import { Flex } from 'theme';
+import { withAuth } from 'hocs';
 
 const NextAuth = () => {
   const { isModalOpen, setIsModalOpen } = useContext(AppContext);
-
   return (
     <>
       <CSVUpload />
@@ -20,4 +20,4 @@ const NextAuth = () => {
   );
 };
 
-export default NextAuth;
+export default withAuth(NextAuth);

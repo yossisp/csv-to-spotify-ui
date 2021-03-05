@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Card, Button } from 'theme';
 import { motion } from 'framer-motion';
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   position: fixed;
   top: 0;
   bottom: 0;

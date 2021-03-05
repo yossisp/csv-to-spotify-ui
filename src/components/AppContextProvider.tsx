@@ -19,13 +19,13 @@ const AppContextProvider = ({ children }) => {
   const [userSpotifyID, setUserSpotifyID] = useState<string | null>(null);
   const [isUserFound, setIsUserFound] = useState<boolean | null>(null);
   const [progress, setProgress] = useState<ProgressPayload | null>(null);
-  const [csvFileName, setCSVFileName] = useState();
+  const [csvFileName, setCSVFileName] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [newReleases, setNewReleases] = useState();
+  const [newReleases, setNewReleases] = useState(null);
   const [isWSConnectionAccepted, setIsWSConnectionAccepted] = useState<boolean>(
     false
   );
-  const [genres, setGenres] = useState();
+  const [genres, setGenres] = useState(null);
   const [recommendations, setRecommendations] = useState();
   const addError = useCallback(
     (error) => setErrors((prevErrors) => [...prevErrors, error]),
@@ -70,6 +70,18 @@ const AppContextProvider = ({ children }) => {
     onMessage,
   });
 
+  const cleanUp = () => {
+    setErrors([]);
+    setUserSpotifyID(null);
+    setIsUserFound(null);
+    setProgress(null);
+    setCSVFileName(null);
+    setNewReleases(null);
+    setIsWSConnectionAccepted(false);
+    setGenres(null);
+    setRecommendations(null);
+  };
+
   useEffect(() => {
     if (userSpotifyID) {
       sendJsonMessage({ type: WsMessageTypes.user, payload: userSpotifyID });
@@ -95,6 +107,7 @@ const AppContextProvider = ({ children }) => {
         recommendations,
         genres,
         isWSConnectionAccepted,
+        cleanUp,
       }}
     >
       {children}

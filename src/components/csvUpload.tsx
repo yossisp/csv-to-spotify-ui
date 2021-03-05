@@ -77,7 +77,7 @@ const UploadCSV = () => {
           </Flex>
         </Modal>
       )}
-      <Card>
+      <Card pb={16}>
         Please upload a CSV (<Span bold>comma</Span>
         -separated) file with playlist data:
         <LearnMore onClick={() => setIsExplanationModalOpen(true)}>
@@ -103,7 +103,7 @@ const UploadCSV = () => {
           />
           <label htmlFor="contained-button-file" />
         </Card>
-        <Card width={300} pt={30}>
+        <Card width={400} pt={200}>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -116,7 +116,7 @@ const UploadCSV = () => {
               );
             }}
           >
-            <ButtonMui type="submit">Start Upload</ButtonMui>
+            <ButtonMui type="submit"><Span fontSize={24}>Start Upload</Span></ButtonMui>
           </form>
         </Card>
       </Card>
