@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { signin, signout, useSession } from 'next-auth/client';
 import { AppContext, Menu } from 'components';
-import { Card } from 'theme';
+import { Card, ButtonMui } from 'theme';
 
 const Nav = () => {
   const { setUserSpotifyID } = useContext(AppContext);
@@ -41,7 +41,7 @@ const Nav = () => {
                   signin();
                 }}
               >
-                <button>Sign in</button>
+                <ButtonMui color="secondary">Sign in</ButtonMui>
               </a>
             </div>
           )}
@@ -63,8 +63,9 @@ const Nav = () => {
                   e.preventDefault();
                   signout();
                 }}
+                style={{ textDecoration: 'none' }}
               >
-                <button>Sign out</button>
+                <ButtonMui color="secondary">Sign out</ButtonMui>
               </a>
             </div>
           )}

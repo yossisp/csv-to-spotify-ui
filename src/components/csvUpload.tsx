@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { apiUrl } from 'config';
-import { Span, Card, Button } from 'theme';
+import { Span, Card, Button, ButtonMui } from 'theme';
 import { AppContext } from 'components';
 
 function readCSVFile(
@@ -88,9 +88,7 @@ const UploadCSV = () => {
               );
             }}
           >
-            <Button width={300} height={40} b={0} type="submit" fontSize={18}>
-              Start Upload
-            </Button>
+            <ButtonMui type="submit">Start Upload</ButtonMui>
           </form>
         </Card>
       </Card>
