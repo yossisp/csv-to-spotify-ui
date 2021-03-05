@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { width, space, typography } from 'styled-system';
+import { width, space, typography, color } from 'styled-system';
 import { bold } from './system';
 
 const Span = styled.span`
@@ -7,6 +7,7 @@ const Span = styled.span`
   ${space}
   ${typography}
   ${bold}
+  ${color}
 `;
 
 export default Span;

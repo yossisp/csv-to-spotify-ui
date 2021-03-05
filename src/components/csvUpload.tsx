@@ -1,8 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { apiUrl } from 'config';
-import { Span, Card, Button, ButtonMui } from 'theme';
-import { AppContext } from 'components';
+import { Span, Card, Flex, ButtonMui } from 'theme';
+import { AppContext, Modal } from 'components';
+import styled from 'styled-components';
+
+const LearnMore = styled.span`
+  font-style: italic;
+  color: blue;
+  role: button;
+  cursor: pointer;
+`;
 
 function readCSVFile(
   file: any,
@@ -46,6 +54,9 @@ function readCSVFile(
 }
 
 const UploadCSV = () => {
+  const [isExplanationModalOpen, setIsExplanationModalOpen] = useState<boolean>(
+    false
+  );
   const { addError, setCSVFileName, userSpotifyID: userId } = useContext(
     AppContext
   );
@@ -54,10 +65,27 @@ const UploadCSV = () => {
 
   return (
     <Card>
+      {isExplanationModalOpen && (
+        <Modal close={() => setIsExplanationModalOpen(false)}>
+          <Flex column center backgroundColor="white" p={16} width={250}>
+            <Span width={200} fontSize={10} lineHeight="0.7rem">
+              The format of the CSV file should contain at least two columns:
+              first column should be song name and the second - artist. <br /><br /> If
+              you're using Apple Music your playlists can be exported to a 
+              text file which can then be converted to CSV using Microsoft Excel (as of Itunes 12.8: File -> Library -> Export Playlist).
+            </Span>
+          </Flex>
+        </Modal>
+      )}
       <Card>
         Please upload a CSV (<Span bold>comma</Span>
         -separated) file with playlist data:
+        <LearnMore onClick={() => setIsExplanationModalOpen(true)}>
+          {' '}
+          (learn more on playlist format)
+        </LearnMore>
       </Card>
+
       <Card>
         <Card>
           <input
@@ -75,7 +103,7 @@ const UploadCSV = () => {
           />
           <label htmlFor="contained-button-file" />
         </Card>
-        <Card widht={300} pt={30}>
+        <Card width={300} pt={30}>
           <form
             onSubmit={(e) => {
               e.preventDefault();

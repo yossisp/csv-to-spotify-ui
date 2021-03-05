@@ -17,6 +17,8 @@ const Wrapper = styled.div`
   z-index: 10;
 `;
 
+// motion.div adds `transform: scale(2) translateZ(0px)`
+// which double css values (e.g. width, font-size etc.)
 const Content = styled(motion.div)`
   position: relative;
   display: flex;
