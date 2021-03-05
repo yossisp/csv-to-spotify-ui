@@ -15,10 +15,16 @@ const BlinkingAnimation = styled(Card)`
 `;
 
 const Progress = () => {
-  const { errors, progress, isUserFound, csvFileName } = useContext(AppContext);
+  const {
+    errors,
+    progress,
+    isUserFound,
+    csvFileName,
+    isJobFinished,
+  } = useContext(AppContext);
   return (
     <Flex column>
-      {csvFileName && (
+      {csvFileName && !isJobFinished && (
         <BlinkingAnimation pb={24}>
           Adding your tracks to {csvFileName} Spotify playlist...
         </BlinkingAnimation>

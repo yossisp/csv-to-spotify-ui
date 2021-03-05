@@ -1,10 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Progress, CSVUpload, Modal, AppContext } from 'components';
 import { Flex, Card } from 'theme';
 import { withAuth } from 'hocs';
 
 const NextAuth = () => {
-  const { isModalOpen, setIsModalOpen } = useContext(AppContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isJobFinished } = useContext(AppContext);
+  useEffect(() => {
+    if (isJobFinished) {
+      setIsModalOpen(true);
+    }
+  }, [isJobFinished]);
   return (
     <Flex>
       <Card pr={64}>

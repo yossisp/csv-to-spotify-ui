@@ -20,7 +20,7 @@ const AppContextProvider = ({ children }) => {
   const [isUserFound, setIsUserFound] = useState<boolean | null>(null);
   const [progress, setProgress] = useState<ProgressPayload | null>(null);
   const [csvFileName, setCSVFileName] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isJobFinished, setIsJobFinished] = useState<boolean>(false);
   const [newReleases, setNewReleases] = useState(null);
   const [isWSConnectionAccepted, setIsWSConnectionAccepted] = useState<boolean>(
     false
@@ -45,7 +45,7 @@ const AppContextProvider = ({ children }) => {
         setIsUserFound(!!parsed.payload);
         break;
       case WsMessageTypes.jobFinished:
-        setIsModalOpen(true);
+        setIsJobFinished(true);
         break;
       case WsMessageTypes.newReleases:
         const releases = JSON.parse(parsed.payload);
@@ -101,13 +101,12 @@ const AppContextProvider = ({ children }) => {
         setCSVFileName,
         progress,
         isUserFound,
-        isModalOpen,
-        setIsModalOpen,
         sendJsonMessage,
         recommendations,
         genres,
         isWSConnectionAccepted,
         cleanUp,
+        isJobFinished,
       }}
     >
       {children}
