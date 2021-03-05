@@ -29,6 +29,7 @@ interface UserStats {
   name: string;
   status: Status;
   tracksAdded: number;
+  date: string;
 }
 
 const Account = () => {
@@ -62,6 +63,9 @@ const Account = () => {
           <TableHead>
             <TableRow>
               <TableCell>
+                <HeaderCell>Date</HeaderCell>{' '}
+              </TableCell>
+              <TableCell>
                 <HeaderCell>Playlist Name</HeaderCell>{' '}
               </TableCell>
               <TableCell align="right">
@@ -73,15 +77,20 @@ const Account = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {userStats.map((stat) => (
-              <TableRow key={stat.id}>
-                <TableCell component="th" scope="row">
-                  {stat.name}
-                </TableCell>
-                <TableCell align="right">{stat.status}</TableCell>
-                <TableCell align="right">{stat.tracksAdded}</TableCell>
-              </TableRow>
-            ))}
+            {userStats.map((stat) => {
+              return (
+                <TableRow key={stat.id}>
+                  <TableCell component="th" scope="row">
+                    {new Date(stat.date).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {stat.name}
+                  </TableCell>
+                  <TableCell align="right">{stat.status}</TableCell>
+                  <TableCell align="right">{stat.tracksAdded}</TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
