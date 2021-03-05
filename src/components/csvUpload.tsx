@@ -77,13 +77,14 @@ const UploadCSV = () => {
           </Flex>
         </Modal>
       )}
-      <Card pb={16}>
+      <Card pb={32}>
+        <Card>
         Please upload a CSV (<Span bold>comma</Span>
-        -separated) file with playlist data:
-        <LearnMore onClick={() => setIsExplanationModalOpen(true)}>
+        -separated) file with playlist data:</Card>
+        <Card><LearnMore onClick={() => setIsExplanationModalOpen(true)}>
           {' '}
           (learn more on playlist format)
-        </LearnMore>
+        </LearnMore></Card>
       </Card>
 
       <Card>

@@ -18,7 +18,11 @@ const Nav = () => {
   }, [session, setUserSpotifyID]);
 
   return (
-    <Card width={400} pb={50} pt={20}>
+    <Card
+      // width={400}
+      pb={50}
+      pt={20}
+    >
       <nav>
         <noscript>
           <style>{'.nojs-show { opacity: 1; top: 0; }'}</style>

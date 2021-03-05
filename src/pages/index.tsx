@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import { Progress, CSVUpload, Modal, AppContext } from 'components';
-import { Flex } from 'theme';
+import { Flex, Card } from 'theme';
 import { withAuth } from 'hocs';
 
 const NextAuth = () => {
   const { isModalOpen, setIsModalOpen } = useContext(AppContext);
   return (
-    <>
-      <CSVUpload />
+    <Flex>
+      <Card pr={64}>
+        <CSVUpload />
+      </Card>
       <Progress />
       {isModalOpen && (
         <Modal close={() => setIsModalOpen(false)}>
@@ -16,7 +18,7 @@ const NextAuth = () => {
           </Flex>
         </Modal>
       )}
-    </>
+    </Flex>
   );
 };
 

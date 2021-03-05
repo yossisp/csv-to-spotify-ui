@@ -1,17 +1,27 @@
 import React, { useContext } from 'react';
-import { Card, Span } from 'theme';
-import PropTypes from 'prop-types';
+import { Card, Span, Flex } from 'theme';
 import { AppContext, Odometer } from 'components';
 import { serverErrors } from 'config';
+import styled, { keyframes } from 'styled-components';
+
+const blinker = keyframes`
+50% {
+  opacity: 0;
+}
+`;
+
+const BlinkingAnimation = styled(Card)`
+  animation: ${blinker} 3s linear infinite;
+`;
 
 const Progress = () => {
   const { errors, progress, isUserFound, csvFileName } = useContext(AppContext);
   return (
-    <>
+    <Flex column>
       {csvFileName && (
-        <Card pb={24}>
+        <BlinkingAnimation pb={24}>
           Adding your tracks to {csvFileName} Spotify playlist...
-        </Card>
+        </BlinkingAnimation>
       )}
       {errors && (
         <Card>
@@ -27,22 +37,22 @@ const Progress = () => {
         </Card>
       )}
       {progress ? (
-        <>
-          <Card fontSize={22} pt={32}>
+        <Card width={300}>
+          <Flex fontSize={22} pt={32} pb={16} justifyContent="space-between">
             Tracks Added:
             <Span pl={16}>
               <Odometer value={progress.tracksAdded} format="(dddd)" />
             </Span>
-          </Card>
-          <Card fontSize={22}>
+          </Flex>
+          <Flex fontSize={22} justifyContent="space-between">
             Tracks Not Added:
             <Span pl={16}>
               <Odometer value={progress.tracksNotAdded} format="(dddd)" />
             </Span>
-          </Card>
-        </>
+          </Flex>
+        </Card>
       ) : null}
-    </>
+    </Flex>
   );
 };
 
