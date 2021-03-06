@@ -5,5 +5,11 @@ export enum WsMessageTypes {
   newReleases = 'NEW_RELEASES',
   recommendations = 'RECOMMENDATIONS',
   genres = 'GENRES',
-  accepted = 'ACCEPTED'
+  accepted = 'ACCEPTED',
+  error = 'ERROR'
+}
+
+export enum JobFinishedStatus {
+  success = 'SUCCESS',
+  failure = 'FAILURE'
 }

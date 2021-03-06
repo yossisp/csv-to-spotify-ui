@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Card, Span, Flex } from 'theme';
 import { AppContext, Odometer } from 'components';
-import { serverErrors } from 'config';
 import styled, { keyframes } from 'styled-components';
 
 const blinker = keyframes`
@@ -22,6 +21,7 @@ const Progress = () => {
     csvFileName,
     isJobFinished,
   } = useContext(AppContext);
+  console.log('progress errors', errors);
   return (
     <Flex column>
       {csvFileName && !isJobFinished && (
@@ -29,11 +29,16 @@ const Progress = () => {
           Adding your tracks to {csvFileName} Spotify playlist...
         </BlinkingAnimation>
       )}
-      {errors && (
+      {!!errors.length && (
         <Card>
-          {errors.map((error, index) => (
-            <Card key={index}>{serverErrors[error]}</Card>
-          ))}
+          <Card pb={16} color="red" fontSize={22}>
+            The following errors occurred:
+          </Card>
+          <Card>
+            {errors.map((error, index) => (
+              <Card key={index}>{error}</Card>
+            ))}
+          </Card>
         </Card>
       )}
       {isUserFound === false && (

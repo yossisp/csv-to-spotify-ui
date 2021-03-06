@@ -1,6 +1,6 @@
 import React, { useState, createContext, useCallback, useEffect } from 'react';
 import { useWebsocket } from 'hooks';
-import { WsMessageTypes } from 'types';
+import { WsMessageTypes, JobFinishedStatus } from 'types';
 
 export const AppContext = createContext(null);
 
@@ -46,6 +46,11 @@ const AppContextProvider = ({ children }) => {
         break;
       case WsMessageTypes.jobFinished:
         setIsJobFinished(true);
+        if (parsed.payload === JobFinishedStatus.failure) {
+          console.log('parsed.payload === JobFinishedStatus.failure');
+          addError('Adding tracks to Spotify playlist failed.');
+        }
+        console.log('parsed', parsed);
         break;
       case WsMessageTypes.newReleases:
         const releases = JSON.parse(parsed.payload);
@@ -61,6 +66,10 @@ const AppContextProvider = ({ children }) => {
         const genres = JSON.parse(parsed.payload);
         setGenres(genres);
         console.log('genres', genres);
+        break;
+      case WsMessageTypes.error:
+        console.error('error', parsed);
+        addError(parsed.payload);
         break;
       default:
         console.error('unknown message type, message: ', parsed);
