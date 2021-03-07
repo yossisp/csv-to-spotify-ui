@@ -1,15 +1,6 @@
 import React, { useMemo } from 'react';
 import { Formik, Form, Field } from 'formik';
-import {
-  Button,
-  LinearProgress,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  FormControlLabel,
-  Typography,
-} from '@material-ui/core';
-import MuiTextField from '@material-ui/core/TextField';
+import { Button, MenuItem } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
 import Box from '@material-ui/core/Box';
 
@@ -28,8 +19,13 @@ interface Props {
   genres: Genres;
 }
 
+/**
+ *
+ * @param setFormInput function which saves input values
+ * @param genres available music genres in Spotify
+ */
 const RecommendationForm: React.FC<Props> = ({ setFormInput, genres }) => {
-  const processedGenres: string[] = useMemo(
+  const processedGenres = useMemo(
     () =>
       genres.genres.map((genre) => ({
         value: genre,

@@ -3,26 +3,25 @@ import { signin, signout, useSession } from 'next-auth/client';
 import { AppContext, Menu } from 'components';
 import { Card, ButtonMui, Span, Flex } from 'theme';
 
+/**
+ * Navigation component which contains the menu and sign out button.
+ */
 const Nav = () => {
-  const { setUserSpotifyID, cleanUp } = useContext(AppContext);
+  const { setUserSpotifyID, cleanUp, addError } = useContext(AppContext);
   const [session, loading] = useSession();
 
   useEffect(() => {
     const userSpotifyID = session?.user?.id;
     if (session?.errorMessage) {
-      console.error('session.errorMessage: ', session.errorMessage);
+      addError(session.errorMessage);
     }
     if (userSpotifyID) {
       setUserSpotifyID(userSpotifyID);
     }
-  }, [session, setUserSpotifyID]);
+  }, [session, setUserSpotifyID, addError]);
 
   return (
-    <Card
-      // width={400}
-      pb={50}
-      pt={20}
-    >
+    <Card pb={50} pt={20}>
       <nav>
         <noscript>
           <style>{'.nojs-show { opacity: 1; top: 0; }'}</style>

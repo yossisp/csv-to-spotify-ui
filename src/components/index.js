@@ -12,3 +12,4 @@ export { default as Loader } from './Loader';
 export { default as Layout } from './Layout';
 export { default as RecommendationForm } from './RecommendationForm';
 export { default as Odometer } from './Odometer';
+export { default as Alert } from './Alert';

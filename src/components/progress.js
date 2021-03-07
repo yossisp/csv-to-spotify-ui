@@ -13,6 +13,9 @@ const BlinkingAnimation = styled(Card)`
   animation: ${blinker} 3s linear infinite;
 `;
 
+/**
+ * Updates CSV playlist job status.
+ */
 const Progress = () => {
   const {
     errors,
@@ -28,18 +31,6 @@ const Progress = () => {
         <BlinkingAnimation pb={24}>
           Adding your tracks to {csvFileName} Spotify playlist...
         </BlinkingAnimation>
-      )}
-      {!!errors.length && (
-        <Card>
-          <Card pb={16} color="red" fontSize={22}>
-            The following errors occurred:
-          </Card>
-          <Card>
-            {errors.map((error, index) => (
-              <Card key={index}>{error}</Card>
-            ))}
-          </Card>
-        </Card>
       )}
       {isUserFound === false && (
         <Card>

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { apiUrl } from 'config';
 import { Span, Card, Flex, ButtonMui } from 'theme';
@@ -12,12 +12,20 @@ const LearnMore = styled.span`
   cursor: pointer;
 `;
 
+/**
+ * Reads uploaded file and sends it to the server.
+ * @param file file uploaded by the user
+ * @param userId user Spotify id
+ * @param uploadFileName uploaded file name
+ * @param setCSVFileName function which sets csv file name
+ * @param addError function which adds an error to global errors array
+ */
 function readCSVFile(
   file: any,
   userId: string,
   uploadFileName: string,
   setCSVFileName: (fileName: string) => void,
-  addError: any
+  addError: (error: string) => void
 ): void {
   try {
     if (file && userId) {
@@ -53,6 +61,9 @@ function readCSVFile(
   }
 }
 
+/**
+ * Contains the input element which allows to upload a CSV file.
+ */
 const UploadCSV = () => {
   const [isExplanationModalOpen, setIsExplanationModalOpen] = useState<boolean>(
     false

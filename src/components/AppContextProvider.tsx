@@ -2,6 +2,7 @@ import React, { useState, createContext, useCallback, useEffect } from 'react';
 import { useWebsocket } from 'hooks';
 import { WsMessageTypes, JobFinishedStatus } from 'types';
 
+// contains all global state of the application
 export const AppContext = createContext(null);
 
 interface ProgressPayload {
@@ -14,6 +15,10 @@ interface Parsed {
   payload?: any;
 }
 
+/**
+ * Provides all global state of the application to the children as
+ * well as initializes websocket and processes websocket messages.
+ */
 const AppContextProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [userSpotifyID, setUserSpotifyID] = useState<string | null>(null);
@@ -32,53 +37,62 @@ const AppContextProvider = ({ children }) => {
     []
   );
 
-  const onMessage = useCallback<(event: MessageEvent) => void>((event) => {
-    const parsed: Parsed = JSON.parse(event.data);
-    switch (parsed.type) {
-      case WsMessageTypes.accepted:
-        setIsWSConnectionAccepted(true);
-        break;
-      case WsMessageTypes.update:
-        setProgress(parsed.payload);
-        break;
-      case WsMessageTypes.user:
-        setIsUserFound(!!parsed.payload);
-        break;
-      case WsMessageTypes.jobFinished:
-        setIsJobFinished(true);
-        if (parsed.payload === JobFinishedStatus.failure) {
-          console.log('parsed.payload === JobFinishedStatus.failure');
-          addError('Adding tracks to Spotify playlist failed.');
-        }
-        console.log('parsed', parsed);
-        break;
-      case WsMessageTypes.newReleases:
-        const releases = JSON.parse(parsed.payload);
-        setNewReleases(releases);
-        console.log('releases', releases);
-        break;
-      case WsMessageTypes.recommendations:
-        const recommendations = JSON.parse(parsed.payload);
-        setRecommendations(recommendations);
-        console.log('recommendations', recommendations);
-        break;
-      case WsMessageTypes.genres:
-        const genres = JSON.parse(parsed.payload);
-        setGenres(genres);
-        console.log('genres', genres);
-        break;
-      case WsMessageTypes.error:
-        console.error('error', parsed);
-        addError(parsed.payload);
-        break;
-      default:
-        console.error('unknown message type, message: ', parsed);
-    }
-  }, []);
+  /**
+   * Parses websocket messages and saves data to state when necessary.
+   * @param event websocket event - contains message data.
+   */
+  const onMessage = useCallback<(event: MessageEvent) => void>(
+    (event) => {
+      const parsed: Parsed = JSON.parse(event.data);
+      switch (parsed.type) {
+        case WsMessageTypes.accepted:
+          setIsWSConnectionAccepted(true);
+          break;
+        case WsMessageTypes.update:
+          setProgress(parsed.payload);
+          break;
+        case WsMessageTypes.user:
+          setIsUserFound(!!parsed.payload);
+          break;
+        case WsMessageTypes.jobFinished:
+          setIsJobFinished(true);
+          if (parsed.payload === JobFinishedStatus.failure) {
+            console.log('parsed.payload === JobFinishedStatus.failure');
+            addError('Adding tracks to Spotify playlist failed.');
+          }
+          console.log('parsed', parsed);
+          break;
+        case WsMessageTypes.newReleases:
+          const releases = JSON.parse(parsed.payload);
+          setNewReleases(releases);
+          console.log('releases', releases);
+          break;
+        case WsMessageTypes.recommendations:
+          const recommendations = JSON.parse(parsed.payload);
+          setRecommendations(recommendations);
+          console.log('recommendations', recommendations);
+          break;
+        case WsMessageTypes.genres:
+          const genres = JSON.parse(parsed.payload);
+          setGenres(genres);
+          console.log('genres', genres);
+          break;
+        case WsMessageTypes.error:
+          console.error('error', parsed);
+          addError(parsed.payload);
+          break;
+        default:
+          console.error('unknown message type, message: ', parsed);
+      }
+    },
+    [addError]
+  );
+
   const { sendJsonMessage } = useWebsocket({
     onMessage,
   });
 
+  // resets global state
   const cleanUp = () => {
     setErrors([]);
     setUserSpotifyID(null);

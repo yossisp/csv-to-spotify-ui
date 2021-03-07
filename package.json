@@ -12,6 +12,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
     "@types/styled-components": "^5.1.7",
     "formik": "^2.2.6",
     "formik-material-ui": "^3.0.1",

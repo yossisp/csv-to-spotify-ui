@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu, { MenuProps } from '@material-ui/core/Menu';
@@ -9,8 +9,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FeaturedPlayListIcon from '@material-ui/icons/FeaturedPlayList';
 import { useRouter } from 'next/router';
-import { motion } from 'framer-motion';
-import { Span } from 'theme';
 
 const StyledMenu = withStyles({
   paper: {
@@ -32,7 +30,10 @@ const StyledMenu = withStyles({
   />
 ));
 
-export default function CustomizedMenus() {
+/**
+ * Displays menu button which lists available operations in the application.
+ */
+export default function CustomizedMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {

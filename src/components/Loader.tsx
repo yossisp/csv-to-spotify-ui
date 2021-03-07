@@ -5,6 +5,11 @@ import { Wrapper } from './Modal';
 interface Props {
   isLoading: boolean;
 }
+
+/**
+ * Displays loading animation.
+ * @param isLoading should the component be displayed
+ */
 const Loader: React.FC<Props> = ({ isLoading }) => (
   <Wrapper>
     <LoaderSpinner
