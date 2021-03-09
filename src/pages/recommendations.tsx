@@ -23,6 +23,11 @@ interface RecommendationsData {
   tracks: Track[];
 }
 
+/**
+ * Display a form which user can use to provide input and
+ * receive artist recommendations based on the form.
+ * @returns React component.
+ */
 const Recommendations = () => {
   const [formInput, setFormInput] = useState();
   const {

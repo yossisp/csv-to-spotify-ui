@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { ReactChild } from 'react';
 import { Provider } from 'next-auth/client';
 import { siteUrl } from 'config';
 import { AppContextProvider, Layout } from 'components';
+import { AppProps } from 'next/app';
 
 import '../css/styles.css';
 import '../css/odometer.css';
 
-const App = ({ Component, pageProps }) => {
+interface Props {
+  /**
+   * Page route to render.
+   */
+  Component: ReactChild;
+  /**
+   * Next.js props.
+   */
+  pageProps: AppProps;
+}
+
+/**
+ * Passes next.js pageProps to child page.
+ * @returns React component.
+ */
+const App: React.FC<Props> = ({ Component, pageProps }) => {
   const { session } = pageProps;
   console.log('_app session', session);
 

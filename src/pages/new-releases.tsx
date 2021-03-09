@@ -24,21 +24,18 @@ interface Release {
 interface NewReleasesAlbums {
   items: Release[];
 }
-interface Albums {
+interface Releases {
   albums?: NewReleasesAlbums;
 }
 
-interface Props {
-  releases?: Albums;
-}
-
-const NewReleases: React.FC<Props> = () => {
-  const {
-    newReleases,
-    sendJsonMessage,
-    userSpotifyID,
-    isWSConnectionAccepted,
-  } = useContext(AppContext);
+/**
+ * Displays new releases.
+ * @returns React component.
+ */
+const NewReleases: React.FC = () => {
+  const appContext = useContext(AppContext);
+  const { newReleases }: { newReleases: Releases } = appContext;
+  const { sendJsonMessage, userSpotifyID, isWSConnectionAccepted } = appContext;
 
   useEffect(() => {
     if (userSpotifyID && isWSConnectionAccepted) {

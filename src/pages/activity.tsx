@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Grid, Card, H1, Flex, Span } from 'theme';
-import { Link, AppContext, Loader, RecommendationForm } from 'components';
-import { WsMessageTypes } from 'types';
-import { usePrevious } from 'hooks';
+import { Card, Span } from 'theme';
+import { AppContext } from 'components';
 import { apiUrl } from 'config';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -32,6 +29,10 @@ interface UserStats {
   date: string;
 }
 
+/**
+ * The page displays user-related data.
+ * @returns React component.
+ */
 const Account = () => {
   const [userStats, setUserStats] = useState<UserStats[]>([]);
   const { userSpotifyID } = useContext(AppContext);

@@ -3,7 +3,11 @@ import { Progress, CSVUpload, Modal, AppContext } from 'components';
 import { Flex, Card } from 'theme';
 import { withAuth } from 'hocs';
 
-const NextAuth = () => {
+/**
+ * Homepage. Allows to upload a CSV file and displays the upload result.
+ * @returns React component.
+ */
+const Homepage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { isJobFinished } = useContext(AppContext);
   useEffect(() => {
@@ -28,4 +32,4 @@ const NextAuth = () => {
   );
 };
 
-export default withAuth(NextAuth);
+export default withAuth(Homepage);
