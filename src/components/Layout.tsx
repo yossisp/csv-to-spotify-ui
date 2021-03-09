@@ -7,6 +7,7 @@ import { AppContext } from './AppContextProvider';
 /**
  * Defines the layout skeleton for the application and displays errors when
  * they exist.
+ * @returns React component.
  */
 const Layout: React.FC = ({ children }) => {
   const { errors } = useContext(AppContext);

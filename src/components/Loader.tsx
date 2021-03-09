@@ -3,12 +3,14 @@ import LoaderSpinner from 'react-loader-spinner';
 import { Wrapper } from './Modal';
 
 interface Props {
+  /**
+   * Displays loading animation.
+   */
   isLoading: boolean;
 }
 
 /**
- * Displays loading animation.
- * @param isLoading should the component be displayed
+ * @returns React component
  */
 const Loader: React.FC<Props> = ({ isLoading }) => (
   <Wrapper>

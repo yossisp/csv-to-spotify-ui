@@ -2,20 +2,30 @@ import React, { ReactChild, ReactChildren } from 'react';
 import NextLink from 'next/link';
 
 interface Props {
+  /**
+   * if the link leads to another website
+   */
   external?: boolean;
+  /**
+   * next.js page route
+   */
   href: string;
+  /**
+   * URL to display in browser
+   */
   as?: string;
+  /**
+   * children component(s)
+   */
   children: ReactChild | ReactChildren;
+  /**
+   * function to call when the link is clicked
+   */
   onClick?: () => void;
 }
 
 /**
- *
- * @param external if the link leads to another website
- * @param href next.js page route
- * @param as URL to display in browser
- * @param onClick function to call when the link is clicked
- * @param children children component(s)
+ * @returns React component
  */
 const Link: React.FC<Props> = ({ external, href, children, as, onClick }) => {
   let link;

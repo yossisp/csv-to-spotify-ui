@@ -37,13 +37,15 @@ const Background = styled.div`
 `;
 
 interface Props {
+  /**
+   * function to run when the modal is closed
+   */
   close: () => void;
 }
 
 /**
  * Modal component.
- * @param close function to run when the modal is closed
- * @param children component children
+ * @returns React component
  */
 const Modal: React.FC<Props> = ({ children, close }) => {
   const [element, setElement] = useState<HTMLDivElement | null>();

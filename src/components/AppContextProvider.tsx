@@ -18,6 +18,7 @@ interface Parsed {
 /**
  * Provides all global state of the application to the children as
  * well as initializes websocket and processes websocket messages.
+ * @returns React provider.
  */
 const AppContextProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);

@@ -1,7 +1,28 @@
 import { websocketUrl } from 'config';
 import useWebReactUseWebsocket, { ReadyState } from 'react-use-websocket';
 
-const useWebsocket = ({ onMessage }) => {
+interface WebsocketData {
+  /**
+   * Stringifies websocket message before sending it.
+   */
+  sendJsonMessage: (message: unknown) => void;
+  /**
+   * Websocket connection status
+   */
+  connectionStatus: string;
+}
+
+/**
+ * Initializes websocket connection to the server.
+ */
+const useWebsocket = ({
+  onMessage,
+}: {
+  /**
+   * message handler which is called when a new message is received.
+   */
+  onMessage: (event: MessageEvent) => void;
+}): WebsocketData => {
   const options = {
     onMessage,
     onError: (error) => {

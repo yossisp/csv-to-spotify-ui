@@ -63,6 +63,7 @@ function readCSVFile(
 
 /**
  * Contains the input element which allows to upload a CSV file.
+ * @returns React component.
  */
 const UploadCSV = () => {
   const [isExplanationModalOpen, setIsExplanationModalOpen] = useState<boolean>(

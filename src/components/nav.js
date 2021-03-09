@@ -5,6 +5,7 @@ import { Card, ButtonMui, Span, Flex } from 'theme';
 
 /**
  * Navigation component which contains the menu and sign out button.
+ * @returns React component
  */
 const Nav = () => {
   const { setUserSpotifyID, cleanUp, addError } = useContext(AppContext);

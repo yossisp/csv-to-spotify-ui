@@ -15,6 +15,7 @@ const BlinkingAnimation = styled(Card)`
 
 /**
  * Updates CSV playlist job status.
+ * @returns React component.
  */
 const Progress = () => {
   const {

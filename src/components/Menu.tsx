@@ -32,6 +32,7 @@ const StyledMenu = withStyles({
 
 /**
  * Displays menu button which lists available operations in the application.
+ * @returns React component
  */
 export default function CustomizedMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

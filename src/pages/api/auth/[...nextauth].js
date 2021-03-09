@@ -1,6 +1,9 @@
 import NextAuth from 'next-auth';
 import { apiUrl, spotifyScopes, clientId, clientSecret } from 'config';
 
+/**
+ * Spotify login options for user.
+ */
 const options = {
   site: process.env.VERCEL_URL,
   providers: [
@@ -26,6 +29,13 @@ const options = {
     },
   ],
   callbacks: {
+    /**
+     * The callback is used send Spotify user data to the server,
+     * so that the server can perform requests to Spotify API using
+     * user tokens.
+     * @param session session data
+     * @param user Spotify user
+     */
     session: async (session, user) => {
       const { refreshToken, accessToken, id: userId } = user.account;
       try {

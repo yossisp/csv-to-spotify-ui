@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Provider } from 'next-auth/client';
 import { siteUrl } from 'config';
 import { AppContextProvider, Layout } from 'components';

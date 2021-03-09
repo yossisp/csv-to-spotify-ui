@@ -15,14 +15,19 @@ interface Genres {
 }
 
 interface Props {
+  /**
+   * function which saves input values
+   */
   setFormInput: (values: Values) => void;
+  /**
+   * available music genres in Spotify
+   */
   genres: Genres;
 }
 
 /**
  *
- * @param setFormInput function which saves input values
- * @param genres available music genres in Spotify
+ * @returns React component.
  */
 const RecommendationForm: React.FC<Props> = ({ setFormInput, genres }) => {
   const processedGenres = useMemo(
