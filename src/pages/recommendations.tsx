@@ -82,7 +82,11 @@ const Recommendations = () => {
             <RecommendationForm setFormInput={setFormInput} genres={genres} />
           </Card>
           {!recommended && EMPTY_INPUT}
-          {recommended === NOT_FOUND && <Card>not found</Card>}
+          {recommended === NOT_FOUND && (
+            <Card fontSize={24} bold>
+              No results were found according to the criteria you entered.
+            </Card>
+          )}
           {recommended?.tracks && (
             <Grid columns="1fr 1fr" width={500}>
               {recommended.tracks.map((recommendation, index) => {
