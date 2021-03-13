@@ -125,8 +125,6 @@ const UploadCSV = () => {
               }}>Choose a file</label>
             </ButtonMui>
           )}
-          
-          
         </Card>
         <Card width={400} pt={200}>
           <form

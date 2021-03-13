@@ -42,13 +42,13 @@ const Progress = () => {
       {progress ? (
         <Card width={300}>
           <Flex fontSize={22} pt={32} pb={16} justifyContent="space-between">
-            Tracks Added:
+            Tracks Found:
             <Span pl={16}>
               <Odometer value={progress.tracksAdded} format="(dddd)" />
             </Span>
           </Flex>
           <Flex fontSize={22} justifyContent="space-between">
-            Tracks Not Added:
+            Tracks Not Found:
             <Span pl={16}>
               <Odometer value={progress.tracksNotAdded} format="(dddd)" />
             </Span>
