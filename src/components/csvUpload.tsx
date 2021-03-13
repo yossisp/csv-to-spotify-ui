@@ -82,7 +82,7 @@ const UploadCSV = () => {
           <Flex column center backgroundColor="white" p={16} width={250}>
             <Span width={200} fontSize={10} lineHeight="0.7rem">
               The format of the CSV file should contain at least two columns:
-              first column should be song name and the second - artist. <br /><br /> If
+              first column should be song name and the second - artist. The first row is reserved for column headers. <br /><br /> If
               you're using Apple Music your playlists can be exported to a 
               text file which can then be converted to CSV using Microsoft Excel (as of Itunes 12.8: File -> Library -> Export Playlist).
             </Span>
@@ -104,7 +104,6 @@ const UploadCSV = () => {
           <input
             accept="text/csv"
             id="contained-button-file"
-            multiple
             type="file"
             onChange={(e) => {
               const uploadFile = e.target.files[0];
