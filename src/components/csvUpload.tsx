@@ -69,7 +69,7 @@ const UploadCSV = () => {
   const [isExplanationModalOpen, setIsExplanationModalOpen] = useState<boolean>(
     false
   );
-  const { addError, setCSVFileName, userSpotifyID: userId, isJobFinished, cleanUp } = useContext(
+  const { addError, setCSVFileName, userSpotifyID: userId, isJobFinished } = useContext(
     AppContext
   );
   const [uploadedFile, setUploadedFile] = useState();
@@ -112,14 +112,17 @@ const UploadCSV = () => {
               if (uploadFile) {
                 setUploadFileName(uploadFile.name);
                 setUploadedFile(uploadFile);
-                e.target.files = null
               }
             }}
             style={{ display: 'none'}}
           />
-          {!uploadedFile && (
+          {uploadedFile ? (
+            <Card fontSize={18}>File chosen: {uploadFileName}</Card>
+          ) : (
             <ButtonMui>
-              <label htmlFor="contained-button-file">Choose a file</label>
+              <label htmlFor="contained-button-file" style={{
+                cursor: 'pointer'
+              }}>Choose a file</label>
             </ButtonMui>
           )}
           
@@ -150,12 +153,7 @@ const UploadCSV = () => {
           )}
           {isJobFinished && (
             <ButtonMui onClick={() => {
-              cleanUp();
-              setCSVFileName(null);
-              setUploadedFile(null);
-              setIsJobInProgress(false);
-              
-              // window.location.reload()
+              window.location.reload()
             }}><Span fontSize={24}>Start New Upload</Span></ButtonMui>
           )}
           {isJobInProgress && null}
