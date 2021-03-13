@@ -69,11 +69,12 @@ const UploadCSV = () => {
   const [isExplanationModalOpen, setIsExplanationModalOpen] = useState<boolean>(
     false
   );
-  const { addError, setCSVFileName, userSpotifyID: userId } = useContext(
+  const { addError, setCSVFileName, userSpotifyID: userId, isJobFinished, cleanUp } = useContext(
     AppContext
   );
   const [uploadedFile, setUploadedFile] = useState();
   const [uploadFileName, setUploadFileName] = useState();
+  const [isJobInProgress, setIsJobInProgress] = useState<boolean>(false);
 
   return (
     <Card>
@@ -106,14 +107,23 @@ const UploadCSV = () => {
             id="contained-button-file"
             type="file"
             onChange={(e) => {
+              console.log('onchange')
               const uploadFile = e.target.files[0];
               if (uploadFile) {
                 setUploadFileName(uploadFile.name);
                 setUploadedFile(uploadFile);
+                e.target.files = null
               }
             }}
+            style={{ display: 'none'}}
           />
-          <label htmlFor="contained-button-file" />
+          {!uploadedFile && (
+            <ButtonMui>
+              <label htmlFor="contained-button-file">Choose a file</label>
+            </ButtonMui>
+          )}
+          
+          
         </Card>
         <Card width={400} pt={200}>
           <form
@@ -128,7 +138,27 @@ const UploadCSV = () => {
               );
             }}
           >
-            <ButtonMui type="submit"><Span fontSize={24}>Start Upload</Span></ButtonMui>
+          {!isJobInProgress && !isJobFinished && (
+            <ButtonMui type="submit" onClick={() => {
+              if (uploadedFile) {
+                const timer = setTimeout(() => {
+                  setIsJobInProgress(true);
+                  clearTimeout(timer);
+                }, 0)
+              }
+            }}><Span fontSize={24}>Start Upload</Span></ButtonMui>
+          )}
+          {isJobFinished && (
+            <ButtonMui onClick={() => {
+              cleanUp();
+              setCSVFileName(null);
+              setUploadedFile(null);
+              setIsJobInProgress(false);
+              
+              // window.location.reload()
+            }}><Span fontSize={24}>Start New Upload</Span></ButtonMui>
+          )}
+          {isJobInProgress && null}
           </form>
         </Card>
       </Card>

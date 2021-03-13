@@ -104,6 +104,7 @@ const AppContextProvider = ({ children }) => {
     setIsWSConnectionAccepted(false);
     setGenres(null);
     setRecommendations(null);
+    setIsJobFinished(false);
   };
 
   useEffect(() => {
