@@ -96,7 +96,11 @@ const Account = () => {
         </Table>
       </TableContainer>
     </Card>
-  ) : null;
+  ) : (
+    <Card fontSize={18} bold>
+      No activity to display.
+    </Card>
+  );
 };
 
 export default withAuth(Account);
