@@ -1,6 +1,6 @@
-export { default as Progress } from './progress';
-export { default as CSVUpload } from './csvUpload';
-export { default as Nav } from './nav';
+export { default as Progress } from './Progress';
+export { default as CSVUpload } from './CSVUpload';
+export { default as Nav } from './Nav';
 export {
   default as AppContextProvider,
   AppContext,
