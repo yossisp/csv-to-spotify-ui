@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Card } from 'theme';
-import Nav from './nav';
+import Nav from './Nav';
 import Alert from './Alert';
 import { AppContext } from './AppContextProvider';
 
