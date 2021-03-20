@@ -68,7 +68,6 @@ const Nav = () => {
                 onClick={() => {
                   cleanUp();
                   signout({ redirect: false, callbackUrl: '/' });
-                  console.log('onClick signout');
                 }}
                 color="secondary"
               >

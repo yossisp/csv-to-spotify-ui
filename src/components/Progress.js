@@ -25,7 +25,6 @@ const Progress = () => {
     csvFileName,
     isJobFinished,
   } = useContext(AppContext);
-  console.log('progress errors', errors);
   return (
     <Flex column>
       {csvFileName && !isJobFinished && (

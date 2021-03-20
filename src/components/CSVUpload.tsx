@@ -107,7 +107,6 @@ const UploadCSV = () => {
             id="contained-button-file"
             type="file"
             onChange={(e) => {
-              console.log('onchange')
               const uploadFile = e.target.files[0];
               if (uploadFile) {
                 setUploadFileName(uploadFile.name);

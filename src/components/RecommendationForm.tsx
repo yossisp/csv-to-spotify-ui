@@ -46,7 +46,6 @@ const RecommendationForm: React.FC<Props> = ({ setFormInput, genres }) => {
         genre: 'rock',
       }}
       validate={(values: Partial<Values>) => {
-        console.log('values', values);
         const errors: Partial<Values> = {};
         if (!values.artist) {
           errors.artist = 'Required';

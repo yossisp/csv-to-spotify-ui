@@ -45,7 +45,6 @@ const NewReleases: React.FC = () => {
       });
     }
   }, [sendJsonMessage, userSpotifyID, isWSConnectionAccepted]);
-  console.log('newReleases page', newReleases);
   return (
     <>
       <H1 pb={16} isAnimated>

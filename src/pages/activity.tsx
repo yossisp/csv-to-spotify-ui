@@ -48,7 +48,6 @@ const Account = () => {
             body: JSON.stringify({ userId: userSpotifyID }),
           });
           const userStats = await response.json();
-          console.log('userStats', userStats);
           setUserStats(userStats);
         }
       } catch (error) {

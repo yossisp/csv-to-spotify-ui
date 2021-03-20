@@ -24,7 +24,6 @@ interface Props {
  */
 const App: React.FC<Props> = ({ Component, pageProps }) => {
   const { session } = pageProps;
-  console.log('_app session', session);
 
   return (
     <Provider options={{ site: siteUrl }} session={session}>

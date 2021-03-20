@@ -58,25 +58,20 @@ const AppContextProvider = ({ children }) => {
         case WsMessageTypes.jobFinished:
           setIsJobFinished(true);
           if (parsed.payload === JobFinishedStatus.failure) {
-            console.log('parsed.payload === JobFinishedStatus.failure');
             addError('Adding tracks to Spotify playlist failed.');
           }
-          console.log('parsed', parsed);
           break;
         case WsMessageTypes.newReleases:
           const releases = JSON.parse(parsed.payload);
           setNewReleases(releases);
-          console.log('releases', releases);
           break;
         case WsMessageTypes.recommendations:
           const recommendations = JSON.parse(parsed.payload);
           setRecommendations(recommendations);
-          console.log('recommendations', recommendations);
           break;
         case WsMessageTypes.genres:
           const genres = JSON.parse(parsed.payload);
           setGenres(genres);
-          console.log('genres', genres);
           break;
         case WsMessageTypes.error:
           console.error('error', parsed);
