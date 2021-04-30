@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Card, Span } from 'theme';
 import { AppContext } from 'components';
-import { apiUrl } from 'config';
+import { getApiUrl } from 'config';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -40,7 +40,7 @@ const Account = () => {
     (async function getUserStats() {
       try {
         if (userSpotifyID && !userStats.length) {
-          const response = await fetch(`${apiUrl}/userstats`, {
+          const response = await fetch(`${getApiUrl()}/userstats`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

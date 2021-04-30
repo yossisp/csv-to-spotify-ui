@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth';
-import { apiUrl, spotifyScopes, clientId, clientSecret } from 'config';
+import { getApiUrl, spotifyScopes, clientId, clientSecret } from 'config';
 
 /**
  * Spotify login options for user.
@@ -39,7 +39,7 @@ const options = {
     session: async (session, user) => {
       const { refreshToken, accessToken, id: userId } = user.account;
       try {
-        await fetch(`${apiUrl}/user`, {
+        await fetch(`${getApiUrl()}/user`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

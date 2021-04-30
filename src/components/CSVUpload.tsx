@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { apiUrl } from 'config';
+import { getApiUrl } from 'config';
 import { Span, Card, Flex, ButtonMui } from 'theme';
 import { AppContext, Modal } from 'components';
 import styled from 'styled-components';
@@ -35,7 +35,7 @@ function readCSVFile(
       reader.onload = async (event) => {
         try {
           const csvFile = reader.result;
-          const response = await fetch(`${apiUrl}/csv`, {
+          const response = await fetch(`${getApiUrl()}/csv`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
